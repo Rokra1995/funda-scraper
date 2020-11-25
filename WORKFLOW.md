@@ -2,13 +2,13 @@ This File contains our development workflow and a little introduction on how to 
 
 Initial steps:
 1. create a directory on your desktop
-    mkdir /home/pi/Assignment2
+    mkdir /home/pi/Online-Data-Mining
 2. move to the directory
-    cd /home/pi/Assignment2    
+    cd /home/pi/Online-Data-Mining    
 3. clone our development repository:
-    git clone https://github.com/Rokra1995/Assignment_2.git
+    git clone https://github.com/barisorman/Online-Data-Mining.git
 4. go to directory
-    cd Assignment_2
+    cd Online-Data-Mining
 5. Create a new local branch for the development on your firstname:
     git checkout -b yourbranchname
 6. Tell git to cache your username and pw so you don't have to type it in everytime you push smth
