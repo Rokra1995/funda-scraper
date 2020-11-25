@@ -3,10 +3,10 @@ Online Data Mining
 Team know_how_to_google
 
 Team members:
-Baris Orman
 Emmanuel Owusu Annim
 Felicia Betten
 Robin Kratschmayr
+Baris Orman
 
 This is an repository contains a python package that implements scraping logic containing information from the listed houses on funda.nl regarding: postcode of the house, asking price, squared meters surface of living area, property surface, year of construction, gardens, type of house, house description, energielabel and number of rooms.
 
