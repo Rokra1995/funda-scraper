@@ -21,23 +21,25 @@ class FundaSpider(scrapy.Spider):
 
     def parse_details(self,response):
         sales_agents = response.css('div.object-primary > section.object-contact > div > h3.object-contact-aanbieder-name > a::text').extract()
+        garden = str(response.css('#content > div > div > div.object-primary > section:nth-child(7) > div > dl:nth-child(19) > dd:nth-child(4)::text').extract_first()).strip().rstrip("\n").rstrip("\r")
+        
         yield {
             'zipcode': response.css('#content > div > div > div.object-primary > header > div > div > div.object-header__details-info.fd-m-bottom-l.fd-m-bottom-s--bp-m.fd-flex > div.object-header__container.fd-m-right-xs.fd-flex-grow > h1 > span.object-header__subtitle.fd-color-dark-3::text').extract_first().strip().rstrip("\n").rstrip("\r").replace(" ","")[:6],
-            'sellingDate': datetime.strptime(response.css('#content > div > div > div.object-primary > section:nth-child(3) > div > dl > dd:nth-child(4)::text').extract_first().strip().rstrip("\n").rstrip("\r"), '%B %d, %Y').date(),
-            'publicationDate': datetime.strptime(response.css('#content > div > div > div.object-primary > section:nth-child(3) > div > dl > dd:nth-child(2)::text').extract_first().strip().rstrip("\n").rstrip("\r"), '%B %d, %Y').date(),
+            'sellingDate': datetime.strptime(str(response.css('#content > div > div > div.object-primary > section:nth-child(3) > div > dl > dd:nth-child(4)::text').extract_first()).strip().rstrip("\n").rstrip("\r"), '%B %d, %Y').date(),
+            'publicationDate': datetime.strptime(str(response.css('#content > div > div > div.object-primary > section:nth-child(3) > div > dl > dd:nth-child(2)::text').extract_first()).strip().rstrip("\n").rstrip("\r"), '%B %d, %Y').date(),
             'sellingPrice': int(re.findall('\d*\,?\d+',response.css('#content > div > div > div.object-primary > header > div > div > div.object-header__pricing.fd-text-size-l.fd-flex--bp-m.fd-align-items-center > div > strong::text').extract_first().strip().rstrip("\n").rstrip("\r"))[0].replace(",","")),
             'housetype': response.css('#content > div > div > div.object-primary > section:nth-child(7) > div > dl:nth-child(5) > dd:nth-child(2)::text').extract_first().strip().rstrip("\n").rstrip("\r"),
             'categoryobject': response.css('#content > div > div > div.object-primary > section:nth-child(7) > div > dl:nth-child(5) > dd:nth-child(4)::text').extract_first().strip().rstrip("\n").rstrip("\r"),
             'yearofbuilding': response.css('#content > div > div > div.object-primary > section:nth-child(7) > div > dl:nth-child(5) > dd:nth-child(6)::text').extract_first().strip().rstrip("\n").rstrip("\r"),
-            'garden': response.css('#content > div > div > div.object-primary > section:nth-child(7) > div > dl:nth-child(19) > dd:nth-child(4)::text').extract_first().strip().rstrip("\n").rstrip("\r"),
-            'garden_binary': 1 if ('garden' in response.css('#content > div > div > div.object-primary > section:nth-child(7) > div > dl:nth-child(19) > dd:nth-child(4)::text').extract_first().strip().rstrip("\n").rstrip("\r")) else 0,
+            'garden': garden,
+            'garden_binary': 1 if ('garden' in garden) else 0,
             'parcelsurface': int(max(re.findall("\d+", response.css('#content > div > div > div.object-primary > section:nth-child(7) > div > dl:nth-child(8) > dd.object-kenmerken-group-list > dl > dd:nth-child(2)::text').extract_first().strip().rstrip("\n").rstrip("\r")))),
             'numberrooms': int(max(re.findall("\d+", response.css('#content > div > div > div.object-primary > section:nth-child(7) > div > dl:nth-child(11) > dd:nth-child(2)::text').extract_first()))),
             'numberbathrooms': int(max(re.findall("\d+",response.css('#content > div > div > div.object-primary > section:nth-child(7) > div > dl:nth-child(11) > dd:nth-child(4)::text').extract_first()))),
-            'energylabelclass': response.css('span.energielabel::text').extract_first().strip().rstrip("\n").rstrip("\r"),
+            'energylabelclass': str(response.css('span.energielabel::text').extract_first()).strip().rstrip("\n").rstrip("\r"),
             'surface': int(max(re.findall("\d+",response.css('#content > div > div > div.object-primary > section:nth-child(7) > div > dl:nth-child(8) > dd:nth-child(5)::text').extract_first()))),
             'fulldescription': ''.join(response.css('div.object-description-body *::text').extract()).strip().rstrip("\n").rstrip("\r").replace("  "," ").replace("   "," "),
-            'sales_agent': sales_agents[0] if len(sales_agents)>=1 else 'None',
-            'buying_agent': sales_agents[1] if len(sales_agents)==2 else 'None',
+            'sales_agent': sales_agents[0] if len(sales_agents)>=1 else None,
+            'buying_agent': sales_agents[1] if len(sales_agents)==2 else None,
             'url': response,
         }
