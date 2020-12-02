@@ -7,17 +7,32 @@ class funda_info_spider(scrapy.Spider):
     name = 'funda_info'
     allowed_domains = ['funda.nl']
     start_urls = [
-        'https://www.funda.nl/koop/verkocht/amsterdam/huis-41194835-buiksloterdijk-236/',
-        'https://www.funda.nl/en/koop/verkocht/waalwijk/huis-41100016-poelruitstraat-26/', 
+        #'https://www.funda.nl/koop/verkocht/amsterdam/huis-41194835-buiksloterdijk-236/',
+        #'https://www.funda.nl/en/koop/verkocht/waalwijk/huis-41100016-poelruitstraat-26/'
+        'https://www.funda.nl/koop/heel-nederland/verkocht/sorteer-afmelddatum-af/',
     ]
 
     def parse(self, response):
+        #follow pagination link
+        next_page_url = response.css('#content > form > div.fd-p-horizontal-none.container.search-main.historic > nav > a::attr(href)').extract_first()
+        for url in next_page_url:
+            url = response.urljoin(next_page_url)
+            yield scrapy.Request(url, self.parse_details,
+            )
+
+    def parse_details(self, response):
         for funda in response.css('div.object-primary'):
-            yield{
+            item = {
                 'surface_area_sqm': response.css('div.object-primary > section:nth-child(7) > div > dl:nth-child(8) > dd:nth-child(5)::text').extract_first().strip().rstrip("\n").rstrip("\r"),
                 'year_of_construction': response.css('div.object-primary > section:nth-child(7) > div > dl:nth-child(5) > dd:nth-child(6)::text').extract_first().strip().rstrip("\n").rstrip("\r"),
                 'description_garden': response.css('div.object-primary > section:nth-child(7) > div > dl:nth-child(19) > dd:nth-child(4)::text').extract_first().strip().rstrip("\n").rstrip("\r"),
             }
+            yield item
+        #follow pagination link
+        #next_page_url = response.css('#content > form > div.fd-p-horizontal-none.container.search-main.historic > nav > a::attr(href)').extract_first()
+        #if next_page_url:
+         #   next_page_url = response.urljoin(next_page_url)
+          #  yield scrapy.Request(url=next_page_url, callback=self.parse)
 
 '''
 output1: {'surface_area_sqm': '102 m²', 'year_of_construction': '1962', 'garden': 'Back garden and front garden'}
@@ -73,3 +88,7 @@ output2:
 
 '''
 
+## pagination partition
+
+#next_page_url = response.css('div.fd-p-horizontal-none.container.search-main.historic > nav > a::attr(href)').extract()
+#response.urljoin(next_page_url)

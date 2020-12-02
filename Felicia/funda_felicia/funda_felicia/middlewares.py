@@ -101,3 +101,16 @@ class FundaFeliciaDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+#below has been copied from https://support.scrapinghub.com/support/solutions/articles/22000219743-using-a-custom-proxy-in-a-scrapy-spider
+#from w3lib.http import basic_auth_header
+
+# from w3lib.http import basic_auth_header
+#class CustomProxyMiddleware(object):
+#    def process_request(self, request, spider):
+ #       request.meta['proxy'] = "https://<PROXY_IP_OR_URL>:<PROXY_PORT>"
+ #       request.meta['proxy'] = "http://lum-customer-hvanl-zone-residential:7a3493d167f6@zproxy.lum-superproxy.io:22225"
+ #       request.meta['proxy'] = "http://127.0.0.1:24001"
+ #       request.headers['Proxy-Authorization'] = basic_auth_header(
+ #           '<PROXY_USERNAME>', '<PROXY_PASSWORD>')
+
