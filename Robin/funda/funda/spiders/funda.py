@@ -1,12 +1,14 @@
 import scrapy
 from datetime import datetime
 import re
+import os
+
 
 class FundaSpider(scrapy.Spider):
     name = 'funda'
     allowed_domains = ['funda.nl']
     start_urls = ['https://www.funda.nl/en/koop/gemeente-amsterdam/verkocht/appartement/sorteer-afmelddatum-af/']
-    
+   
     def parse(self, response):
         urls = response.css('ol.search-results > li.search-result > div.search-result-main > div.search-result-content >div.search-result-content-inner > div > div.search-result__header-title-col > a::attr(href)').extract()
         count = 0
@@ -17,11 +19,14 @@ class FundaSpider(scrapy.Spider):
             if count == 5:
                 break
         
-        #next_page_url = response.css('#content > form > div.fd-p-horizontal-none.container.search-main > nav > a::attr(href)').extract_first()
+
+        next_page_url = response.css('#content > form > div.fd-p-horizontal-none.container.search-main > nav > a::attr(href)').extract_first()
+        if len(response.css('#content > form > div.fd-p-horizontal-none.container.search-main.historic > nav >a').extract()) == 2:
+            next_page_url = response.css('#content > form > div.fd-p-horizontal-none.container.search-main.historic > nav > a:nth-child(4)::attr(href)').extract_first()
         #for testing purpose only scraping 2 pages
         #next_page_url = '/en/koop/heel-nederland/verkocht/sorteer-afmelddatum-af/p2/'
-        #next_page_url = response.urljoin(next_page_url)
-        #yield scrapy.Request(next_page_url, self.parse)
+        next_page_url = response.urljoin(next_page_url)
+        yield scrapy.Request(next_page_url, self.parse)
 
     def parse_details(self,response):
         sales_agents = response.css('div.object-primary > section.object-contact > div > h3.object-contact-aanbieder-name > a::text').extract()
