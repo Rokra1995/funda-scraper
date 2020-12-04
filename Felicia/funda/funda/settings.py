@@ -1,4 +1,4 @@
-# Scrapy settings for funda_felicia project
+# Scrapy settings for funda project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,17 +7,17 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'funda_felicia'
+BOT_NAME = 'funda'
 
-SPIDER_MODULES = ['funda_felicia.spiders']
-NEWSPIDER_MODULE = 'funda_felicia.spiders'
+SPIDER_MODULES = ['funda.spiders']
+NEWSPIDER_MODULE = 'funda.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'funda_felicia (+http://www.yourdomain.com)'
+#USER_AGENT = 'funda (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True 
+ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -45,14 +45,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'funda_felicia.middlewares.FundaFeliciaSpiderMiddleware': 543,
+#    'funda.middlewares.FundaSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-	#following line has been copied from https://support.scrapinghub.com/support/solutions/articles/22000219743-using-a-custom-proxy-in-a-scrapy-spider
- #   'funda_felicia.middlewares.CustomProxyMiddleware': 1,
+#    'funda.middlewares.FundaDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -64,7 +63,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'funda_felicia.pipelines.FundaFeliciaPipeline': 300,
+#    'funda.pipelines.FundaPipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -76,14 +75,9 @@ ROBOTSTXT_OBEY = True
 #AUTOTHROTTLE_MAX_DELAY = 60
 # The average number of requests Scrapy should be sending in parallel to
 # each remote server
-#AUTOTHROTTLE_TARGET_CONCURRENCY = 1000.0
+#AUTOTHROTTLE_TARGET_CONCURRENCY = 1000
 # Enable showing throttling stats for every response received:
 #AUTOTHROTTLE_DEBUG = False
-
-#DOWNLOADER_MIDDLEWARES = {
- #   'funda_felicia.middlewares.CustomProxyMiddleware': 350,
- #   'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 400,
-#}
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
