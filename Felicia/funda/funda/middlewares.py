@@ -106,8 +106,8 @@ class FundaDownloaderMiddleware:
 #from w3lib.http import basic_auth_header
 
 # from w3lib.http import basic_auth_header
-#class CustomProxyMiddleware(object):
-#    def process_request(self, request, spider):
+class CustomProxyMiddleware(object):
+    def process_request(self, request, spider):
  #       request.meta['proxy'] = "https://<PROXY_IP_OR_URL>:<PROXY_PORT>"
  #       request.meta['proxy'] = "http://lum-customer-hvanl-zone-residential:7a3493d167f6@zproxy.lum-superproxy.io:22225"
         request.meta['proxy'] = "http://62.251.101.214:24002"
