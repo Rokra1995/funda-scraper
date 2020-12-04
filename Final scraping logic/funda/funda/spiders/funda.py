@@ -66,7 +66,56 @@ class FundaSpider(scrapy.Spider):
 
 # Scraper to scrap information about the brokers
 # Felicia
+# scrapy shell https://www.funda.nl/makelaars/heel-nederland/verkoop/
+class broker_info_spider(scrapy.Spider):
+    name = 'broker'
+    allowed_domains = ['funda.nl']
+    start_urls = [
+        'https://www.funda.nl/makelaars/heel-nederland/verkoop/',
+    ]
+    
+    def parse(self, response):
+        urls = response.css('ol.search-results.fd-p-horizontal > li.makelaars-result-item > div > a::attr(href)').extract()
+        for url in urls:
+            url = response.urljoin(url)
+            yield scrapy.Request(url, self.parse_details,
+            )
+            
+        #go to the next page and scrape the broker details 
+        next_page_url = response.css('#content > form > div.container.search-main.makelaar-search-results-main > nav > a::attr(href)').extract_first()
+        #make sure spider clicks on 'next' page instead of previous page as from the 2nd page on there are 2 'a' objects 
+        if len(response.css('#content > form > div.container.search-main.makelaar-search-results-main > nav > a').extract()) > 1:
+            next_page_url = response.css('#content > form > div.container.search-main.makelaar-search-results-main > nav > a:nth-child(4)::attr(href)').extract_first()
+        next_page_url = response.urljoin(next_page_url)
+        print(next_page_url)
+        print('##########################################################################################') 
+        yield scrapy.Request(next_page_url, self.parse)
+        
+    def int_check(self, number):
+        if number != None and number.isnumeric() == True:
+            return int(number)
+        else:
+            return "Missing" 
+            
+    def catch_missing(self, text):
+        if text == None:
+            return "Missing value"
+        elif len(text) < 1:
+            return "No entry"
+        else:
+            return text
 
+    def parse_details(self, response):        
+        for funda in response.css('#content'):
+            yield{
+                'name_broker': self.catch_missing(response.css('div.container.makelaars-container > div:nth-child(2) > h1::text').extract_first()),
+                'zipcode_broker': self.catch_missing(response.css('div.makelaars-contact > div > div.makelaars-contact-container > div:nth-child(1) > div.makelaars-contact-item.makelaars-contact-address > p > span:nth-child(3)::text').extract_first()),
+                'description_broker': self.catch_missing(response.css('#content > div > div.container > div.makelaars-kantoor-details > section.makelaars-about > div > div > p:nth-child(2)::text').extract_first()).replace(u'\xa0', u' ').replace(u'\r', u' ').replace(u'\n', u' '),
+                'number_reviews_broker': self.int_check(response.css('#content > div > section.makelaars-reviews > div > div > div:nth-child(1) > a > span *::text').extract_first()),
+                'number_houses_for_sale_offered': self.int_check(response.css('div.makelaars-stats > div:nth-child(1) > div > div:nth-child(2) > div.makelaars-stats-number::text').extract_first()),
+                'number_houses_sold_last_12_months': self.int_check(response.css('div.makelaars-stats > div:nth-child(2) > div > div:nth-child(2) > div.makelaars-stats-number::text').extract_first())
+                }
+           
 
 
 
@@ -76,4 +125,45 @@ class FundaSpider(scrapy.Spider):
 
 # Scraper to scrape the reviews of each sales agent
 # Baris
+class FundaSalesAgentReviewsSpider(scrapy.Spider):
+    name = 'FundaSalesAgentReviews'
+    allowed_domains =  ['funda.nl']
+    start_urls = ['https://www.funda.nl/en/makelaars/heel-nederland/verkoop/soortaanbod-koopwoningen/sorteer-makelaarnaam-op/']
 
+    def parse(self, response):
+        print(response.css('div.makelaars-result-item-thumbnail > a::attr(href)').getall())
+        for reviewpage in response.css('div.makelaars-result-item-thumbnail > a::attr(href)').getall():
+            print('######Reviewpagelink################')
+            print(reviewpage)
+            yield scrapy.Request(response.urljoin(reviewpage), callback=self.parse_review)
+
+        '''
+        # follow pagination link
+        next_page_url = response.xpath('//*[@id="content"]/form/div[2]/nav/a/@href').get()
+        if len(response.css('#content > form > div.container.search-main.makelaar-search-results-main > nav > a').getall()) == 2:
+            next_page_url = response.css('#content > form > div.container.search-main.makelaar-search-results-main > nav > a:nth-child(4)::attr(href)').get()
+        next_page_url = response.urljoin(next_page_url)
+        yield scrapy.Request(url=next_page_url, callback=self.parse)
+        '''
+
+
+    def parse_review(self, response):
+        urls = response.css('div > section.makelaars-reviews > div > div > div:nth-child(1) > a::attr(href)').get()
+        print('########## LINK TO REVIEW PAGE #################')
+        url = response.urljoin(urls)
+        yield scrapy.Request(url=url, callback=self.parse_details)
+
+
+    def parse_details(self, response):
+        yield {
+            'SalesAgent' : response.css('#content > section > div > div.makelaars-content > h1::text').getall(),
+            'Reviews' : ''.join(response.css('div.collapse-text-container::text').getall()).replace("\n","").replace("\r","").replace("  ","").replace("   ","")
+            }
+        print('################################-FINISHED AGENT-#################################################')
+
+        #MY ADJUSTED CODE IF LEN CODE
+        next_page_url = response.css('div.user-reviews.container > div.user-reviews-column-primary > form > nav > a::attr(href)').get()
+        if len(response.css('#content > div.user-reviews.container > div.user-reviews-column-primary > form > nav > a').getall()) == 2:
+            next_page_url = response.css('#content > div.user-reviews.container > div.user-reviews-column-primary > form > nav > a:nth-child(4)::attr(href)').get()
+        next_page_url = response.urljoin(next_page_url)
+        yield scrapy.Request(url=next_page_url, callback=self.parse_details)
