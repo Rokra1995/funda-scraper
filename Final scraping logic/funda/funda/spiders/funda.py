@@ -87,8 +87,6 @@ class broker_info_spider(scrapy.Spider):
         if len(response.css('#content > form > div.container.search-main.makelaar-search-results-main > nav > a').extract()) > 1:
             next_page_url = response.css('#content > form > div.container.search-main.makelaar-search-results-main > nav > a:nth-child(4)::attr(href)').extract_first()
         next_page_url = response.urljoin(next_page_url)
-        print(next_page_url)
-        print('##########################################################################################') 
         yield scrapy.Request(next_page_url, self.parse)
         
     def int_check(self, number):
