@@ -17,7 +17,7 @@ ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
 IMAGES_STORE = 'img'
 
 #specifiy own default csv seperator with posibility for change as argument
-CSV_SEP = ';'
+CSV_SEP = ','
 FEED_EXPORTERS = {
     'csv': 'funda.exporters.CsvCustomSeperator'
 }
