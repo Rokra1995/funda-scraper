@@ -8,6 +8,6 @@
 from itemadapter import ItemAdapter
 
 
-class FundaFeliciaPipeline:
+class FundaPipeline:
     def process_item(self, item, spider):
         return item
