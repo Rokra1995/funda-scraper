@@ -52,6 +52,7 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'funda.middlewares.FundaDownloaderMiddleware': 543,
+    #'funda.middlewares.CustomProxyMiddleware' : 350,
 }
 
 # Enable or disable extensions

@@ -66,7 +66,8 @@ class broker_info_spider(scrapy.Spider):
                 'description_broker': self.catch_missing(unicodedata.normalize('NFKC', ''.join(response.css('#content > div > div.container > div.makelaars-kantoor-details > section.makelaars-about > div > div > p::text').extract()))).replace(u'\r', u' ').replace(u'\n', u''),
                 'number_reviews_broker': self.int_check(response.css('#content > div > section.makelaars-reviews > div > div > div:nth-child(1) > a > span *::text').extract_first()),
                 'number_houses_for_sale_offered': self.int_check(response.css('div.makelaars-stats > div:nth-child(1) > div > div:nth-child(2) > div.makelaars-stats-number::text').extract_first()),
-                'number_houses_sold_last_12_months': self.int_check(response.css('div.makelaars-stats > div:nth-child(2) > div > div:nth-child(2) > div.makelaars-stats-number::text').extract_first())
+                'number_houses_sold_last_12_months': self.int_check(response.css('div.makelaars-stats > div:nth-child(2) > div > div:nth-child(2) > div.makelaars-stats-number::text').extract_first()),
+                'url': response.url
             }
            
 # *:: = select everything that is in the child = output list
