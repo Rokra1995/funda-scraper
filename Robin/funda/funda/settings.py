@@ -25,6 +25,7 @@ FEED_EXPORTERS = {
 DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 1,
     'funda.middlewares.FundaDownloaderMiddleware': 543,
+    'funda.middlewares.CustomProxyMiddleware' : 350,
 }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
