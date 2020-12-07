@@ -73,4 +73,3 @@ class broker_info_spider(scrapy.Spider):
 # ''.join(outputlist) = string generation
 # float(''join(outputlist)) to be able to do calculations 
 # write replace function . to , to be able to convert string to float! 
- 
