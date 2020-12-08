@@ -26,7 +26,7 @@ class broker_info_spider(scrapy.Spider):
     name = 'broker'
     allowed_domains = ['funda.nl']
     start_urls = [
-        'https://www.funda.nl/makelaars/heel-nederland/verkoop/',
+        'https://www.funda.nl/en/makelaars/heel-nederland/verkoop/',
     ]
     
     def parse(self, response):
