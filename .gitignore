@@ -7,3 +7,5 @@ yolov3.weights
 !/Scraping Log files/*.log
 !/Output/*.csv
 !/Object recognition analysis/full/*.jpg
+!/prrof of work/*.jpg
+!/prrof of work/*.png
