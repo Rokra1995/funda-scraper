@@ -28,3 +28,4 @@ Please note the following before checking the Code.
 7. Finally, you will also see the final version of our ERD including the scraped data.
 8. There are two versions of the subset of the scraping with images. (1) where only the galery picture of a listed house was scraped (15000 houses) and (2) where all images of a house are scraped (1500 houses).
 9. some sample images are in this git_repo but more are also on the onedrive.
+
