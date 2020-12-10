@@ -7,10 +7,12 @@ This repository contains several spiders to scrape information that is stored at
 
 Next to these minimum requirements, we have scraped (more) information on:
 1) sold houses
-2) not sold houses
-3) brokers information
-4) brokers reviews
-5) images per house
+2) brokers information
+3) brokers reviews
+4) images per house
+5) object recognition
+
+As the scraped csv files are big, we decide to upload the full versions to OneDrive (https://onedrive.live.com/?authkey=%21AgmmjLDD31MuXX0&id=37D8990536FAED09%21110&cid=37D8990536FAED09) and to Brightspace. On GitHub we have uploaded subsets.
 
 Please note the following before checking the Code.
 1. In the folder Final scraping logic/funda you will first find several .csv files with the output of the scraping.
