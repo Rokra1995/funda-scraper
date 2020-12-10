@@ -1,0 +1,88 @@
+2020-12-08 12:57:14 [scrapy.utils.log] INFO: Scrapy 2.4.1 started (bot: funda)
+2020-12-08 12:57:14 [scrapy.utils.log] INFO: Versions: lxml 4.6.1.0, libxml2 2.9.10, cssselect 1.1.0, parsel 1.6.0, w3lib 1.22.0, Twisted 20.3.0, Python 3.7.5 (default, Nov  1 2019, 02:16:32) - [Clang 11.0.0 (clang-1100.0.33.8)], pyOpenSSL 19.1.0 (OpenSSL 1.1.1h  22 Sep 2020), cryptography 3.2.1, Platform Darwin-19.6.0-x86_64-i386-64bit
+2020-12-08 12:57:14 [scrapy.utils.log] DEBUG: Using reactor: twisted.internet.selectreactor.SelectReactor
+2020-12-08 12:57:14 [scrapy.crawler] INFO: Overridden settings:
+{'AUTOTHROTTLE_ENABLED': True,
+ 'AUTOTHROTTLE_TARGET_CONCURRENCY': 1000,
+ 'BOT_NAME': 'funda',
+ 'LOG_FILE': 'funda_2020_subset_onepic.log',
+ 'NEWSPIDER_MODULE': 'funda.spiders',
+ 'ROBOTSTXT_OBEY': True,
+ 'SPIDER_MODULES': ['funda.spiders']}
+2020-12-08 12:57:14 [scrapy.extensions.telnet] INFO: Telnet Password: 5bf71fb1c94c40ec
+2020-12-08 12:57:14 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.feedexport.FeedExporter',
+ 'scrapy.extensions.logstats.LogStats',
+ 'scrapy.extensions.throttle.AutoThrottle']
+2020-12-08 12:57:14 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'funda.middlewares.CustomProxyMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'funda.middlewares.FundaDownloaderMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2020-12-08 12:57:14 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2020-12-08 12:57:14 [scrapy.middleware] INFO: Enabled item pipelines:
+['scrapy.pipelines.images.ImagesPipeline']
+2020-12-08 12:57:14 [scrapy.core.engine] INFO: Spider opened
+2020-12-08 14:44:11 [scrapy.core.engine] INFO: Closing spider (finished)
+2020-12-08 14:44:11 [scrapy.extensions.feedexport] INFO: Stored csv feed (14080 items) in: funda_2020_subset_onepic.csv
+2020-12-08 14:44:11 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/exception_count': 21,
+ 'downloader/exception_type_count/twisted.web._newclient.ResponseFailed': 21,
+ 'downloader/request_bytes': 19113914,
+ 'downloader/request_count': 30017,
+ 'downloader/request_method_count/GET': 30017,
+ 'downloader/response_bytes': 5078290535,
+ 'downloader/response_count': 29996,
+ 'downloader/response_status_count/200': 29994,
+ 'downloader/response_status_count/302': 1,
+ 'downloader/response_status_count/403': 1,
+ 'dupefilter/filtered': 15057,
+ 'elapsed_time_seconds': 6416.487147,
+ 'file_count': 14080,
+ 'file_status_count/downloaded': 14050,
+ 'file_status_count/uptodate': 30,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2020, 12, 8, 13, 44, 11, 171353),
+ 'item_scraped_count': 14080,
+ 'log_count/DEBUG': 58178,
+ 'log_count/ERROR': 863,
+ 'log_count/INFO': 118,
+ 'log_count/WARNING': 22,
+ 'memusage/max': 453107712,
+ 'memusage/startup': 53100544,
+ 'request_depth_max': 1000,
+ 'response_received_count': 29995,
+ 'retry/count': 21,
+ 'retry/reason_count/twisted.web._newclient.ResponseFailed': 21,
+ 'robotstxt/request_count': 2,
+ 'robotstxt/response_count': 2,
+ 'robotstxt/response_status_count/200': 1,
+ 'robotstxt/response_status_count/403': 1,
+ 'scheduler/dequeued': 15945,
+ 'scheduler/dequeued/memory': 15945,
+ 'scheduler/enqueued': 15945,
+ 'scheduler/enqueued/memory': 15945,
+ 'spider_exceptions/AttributeError': 451,
+ 'spider_exceptions/IndexError': 127,
+ 'spider_exceptions/TypeError': 279,
+ 'spider_exceptions/ValueError': 6,
+ 'start_time': datetime.datetime(2020, 12, 8, 11, 57, 14, 684206)}
+2020-12-08 14:44:11 [scrapy.core.engine] INFO: Spider closed (finished)

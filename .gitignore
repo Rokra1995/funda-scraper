@@ -4,5 +4,6 @@
 *.csv
 *.log
 yolov3.weights
-yolov3.cfg
-coco.names
+!/Scraping Log files/*.log
+!/Output/*.csv
+!/Object recognition analysis/full/*.jpg

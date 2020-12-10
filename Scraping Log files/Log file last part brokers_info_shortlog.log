@@ -1,0 +1,30 @@
+2020-12-09 12:38:33 [scrapy.core.engine] INFO: Closing spider (finished)
+2020-12-09 12:38:33 [scrapy.extensions.feedexport] INFO: Stored csv feed (2911 items) in: brokers_info.csv
+2020-12-09 12:38:33 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 4226940,
+ 'downloader/request_count': 6005,
+ 'downloader/request_method_count/GET': 6005,
+ 'downloader/response_bytes': 60803604,
+ 'downloader/response_count': 6005,
+ 'downloader/response_status_count/200': 3107,
+ 'downloader/response_status_count/301': 2898,
+ 'dupefilter/filtered': 1,
+ 'elapsed_time_seconds': 371.25805,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2020, 12, 9, 11, 38, 33, 862895),
+ 'item_scraped_count': 2911,
+ 'log_count/DEBUG': 8917,
+ 'log_count/INFO': 18,
+ 'memusage/max': 86966272,
+ 'memusage/startup': 38051840,
+ 'request_depth_max': 195,
+ 'response_received_count': 3107,
+ 'robotstxt/request_count': 1,
+ 'robotstxt/response_count': 1,
+ 'robotstxt/response_status_count/200': 1,
+ 'scheduler/dequeued': 6004,
+ 'scheduler/dequeued/memory': 6004,
+ 'scheduler/enqueued': 6004,
+ 'scheduler/enqueued/memory': 6004,
+ 'start_time': datetime.datetime(2020, 12, 9, 11, 32, 22, 604845)}
+2020-12-09 12:38:33 [scrapy.core.engine] INFO: Spider closed (finished)
