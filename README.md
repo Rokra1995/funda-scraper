@@ -14,6 +14,10 @@ Next to these minimum requirements, we have scraped (more) information on:
 
 As the scraped csv files are big, we decide to upload the full versions to OneDrive (https://onedrive.live.com/?authkey=%21AgmmjLDD31MuXX0&id=37D8990536FAED09%21110&cid=37D8990536FAED09) and to Brightspace. On GitHub we have uploaded subsets.
 
+If you want to run the objectrecognition on your machine, another file, which exceeds the github storage limit needs to be downloaded and stored in the following folder 'Object recognition analysis/yolo' the file 'yolov3.weights' can be downloaded in our drive here: https://1drv.ms/u/s!Agnt-jYFmdg3oncRRGd0i_ZTwzVM?e=yHaVPB
+
+An overview on the scraped data can be found in the Scraped_data_ERD.jpg file.
+
 Please note the following before checking the Code.
 1. In the folder Final scraping logic/funda you will first find several .csv files with the output of the scraping.
 2. In that folder you will also find the funda.py file where all spiders are put together, including the teammember that was responsible for that part.
